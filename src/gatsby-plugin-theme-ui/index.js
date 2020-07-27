@@ -92,7 +92,7 @@ const space = [0, 4, 8, 16, 32, 64, 128, 256]
 /**
  * Border-radius
  */
-const radii = [0, 2, 4, 8, 16]
+const radii = [0, 2, 4, 8, 16, 24]
 radii.default = 4
 
 const fonts = {
@@ -130,6 +130,15 @@ const buttons = {
     variant: 'buttons.primary',
     color: 'black',
     bg: 'gray.300',
+  },
+  remove: {
+    variant: 'buttons.outline',
+    color: 'white',
+    bg: 'red.500',
+    boxShadow: 0,
+    p: 2,
+    minWidth: 'none',
+    fontSize: 1,
   },
   outline: {
     variant: 'buttons.primary',

@@ -27,4 +27,4 @@ Menu.propTypes = {
   stepNo: PropTypes.number.isRequired,
 }
 
-export default Menu
+export { Menu }

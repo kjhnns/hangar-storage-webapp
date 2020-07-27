@@ -5,7 +5,7 @@ import { Link } from '@components/Link'
 import { Flex, Box } from '@components/Grid'
 import { Logo } from '@components/Logo'
 
-import Menu from './Menu'
+import { Menu } from './Menu'
 
 const MenuBar = ({ backLink, stepNo, stepName }) => (
   <Flex

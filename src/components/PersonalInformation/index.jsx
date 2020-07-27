@@ -85,7 +85,7 @@ const PersonalInformation = withFormik({
     //   })
     //   await navigate('/settings')
     // }
-    await navigate('/')
+    await navigate('/boxes')
     setSubmitting(false)
   },
   displayName: 'Personal Information',
