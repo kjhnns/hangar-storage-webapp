@@ -13,7 +13,7 @@ const stepBoxStyle = {
   my: 2,
   px: 4,
   py: 3,
-  fontSize: 3,
+  fontSize: [2, 3, 3],
   alignItems: 'center',
   display: 'flex',
   textAlign: 'left',
@@ -42,14 +42,16 @@ const IndexPage = () => {
             flexDirection: 'column',
           }}
         >
-          <Logo />
+          <Box mb={2} width={['100px', '150px', '200px']}>
+            <Logo />
+          </Box>
           <Heading
             as="h1"
-            sx={{ fontSize: [6, 7, 8], textTransform: 'uppercase' }}
+            sx={{ fontSize: [5, 6, 6], textTransform: 'uppercase' }}
           >
             Hangar Storage
           </Heading>
-          <Text my={3} fontSize={4} color="gray.900">
+          <Text my={3} fontSize={[3, 4, 4]} color="gray.900">
             Steps to register your boxes:
           </Text>
           <Flex flexDirection="column">
