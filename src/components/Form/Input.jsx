@@ -10,8 +10,9 @@ const StyledInput = props => (
     {...props}
     sx={{
       borderRadius: 'default',
-      boxShadow: 'inset 0 0 0 1px',
+      boxShadow: 'primaryBase',
       minHeight: '50px',
+      bg: 'rgba(255,255,255,0.6)',
     }}
   />
 )
