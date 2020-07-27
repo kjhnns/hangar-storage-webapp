@@ -1,4 +1,7 @@
 const website = require('./config/website')
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 const pathPrefix = website.pathPrefix === `/` ? `` : website.pathPrefix
 
@@ -35,12 +38,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `./config/typography.js`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-lodash`,
       options: {
         disabledFeatures: [`shorthands`, `cloning`, `currying`],
@@ -49,25 +46,21 @@ module.exports = {
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: website.googleAnalyticsId,
-        anonymize: true,
-      },
-    },
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: website.title,
         short_name: website.shortName,
         description: website.description,
-        start_url: `${pathPrefix}/?utm_source=a2hs`,
+        start_url: `${pathPrefix}/dashboard`,
         background_color: website.backgroundColor,
         theme_color: website.themeColor,
         display: `standalone`,
         icon: website.favicon,
+        icon_options: {
+          purpose: `maskable`,
+        },
       },
     },
-    `gatsby-plugin-offline`,
+    `gatsby-plugin-theme-ui`,
   ],
 }

@@ -1,4 +1,3 @@
-import Link from './Link'
-import OutboundLink from './OutboundLink'
-
-export { Link, OutboundLink }
+export { Link } from './Link'
+export { AppLink } from './AppLink'
+export { Link as OutboundLink } from 'rebass'
