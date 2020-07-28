@@ -14,7 +14,7 @@ const PersonalInformationPage = () => {
         sx={{
           pb: '84px',
           minHeight: '100vh',
-          bg: 'gray.100',
+          bg: 'gray.200',
         }}
       >
         <MenuBar stepName="Informações Pessoais" stepNo={1} backLink="/" />

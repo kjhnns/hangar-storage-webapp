@@ -24,17 +24,13 @@ const Card = ({ serialNo, seal01, seal02, description }) => (
       m: [0, 3, 3],
       mb: 3,
       display: 'grid',
-      gridTemplateAreas: '"main delete"',
+      gridTemplateColumns: '1fr .1fr',
       width: '100%',
       maxWidth: '600px',
     }}
   >
-    <Box sx={{ gridArea: 'delete' }}>
-      <img src={DeleteIcon} alt="remover" sx={{ fill: 'red.500' }} />
-    </Box>
     <Box
       sx={{
-        gridArea: 'main',
         gridTemplateColumns: ['1fr', '0.5fr 1fr', '0.5fr 1fr'],
         display: 'grid',
         maxWidth: '600px',
@@ -48,6 +44,9 @@ const Card = ({ serialNo, seal01, seal02, description }) => (
       <Box sx={valueTableStyle}>{seal02}</Box>
       <Box sx={labelTableStyle}>Descrição</Box>
       <Box sx={valueTableStyle}>{description}</Box>
+    </Box>
+    <Box>
+      <img src={DeleteIcon} alt="remover" sx={{ fill: 'red.500' }} />
     </Box>
   </Box>
 )
