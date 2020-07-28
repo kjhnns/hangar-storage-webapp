@@ -17,7 +17,7 @@ const PersonalInformationPage = () => {
           bg: 'gray.100',
         }}
       >
-        <MenuBar stepName="Informações Pessoais" stepNo="1" backLink="/" />
+        <MenuBar stepName="Informações Pessoais" stepNo={1} backLink="/" />
         <Box
           sx={{
             py: 4,

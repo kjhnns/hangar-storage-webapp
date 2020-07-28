@@ -2,43 +2,44 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useField } from 'formik'
-import { Input as RebassInput } from '@rebass/forms'
+import { Textarea as RebassTextArea } from '@rebass/forms'
 
 import { Text } from '@components/Typography'
 
-const StyledInput = props => (
-  <RebassInput
+const StyledTextArea = props => (
+  <RebassTextArea
     {...props}
     sx={{
       borderRadius: 'default',
       boxShadow: 'primaryBase',
-      minHeight: '50px',
+      minHeight: '100px',
       bg: 'rgba(255,255,255,0.6)',
+      fontFamily: 'body',
     }}
   />
 )
 
-const Input = ({ type, ...props }) => {
+const TextArea = ({ type, ...props }) => {
   const [field, meta] = useField(props)
   const { name } = props
 
   return (
     <>
-      <StyledInput type={type} id={name} {...field} {...props} />
+      <StyledTextArea type={type} id={name} {...field} {...props} />
       {meta.touched && meta.error ? <Text>{meta.error}</Text> : null}
     </>
   )
 }
 
-Input.defaultProps = {
+TextArea.defaultProps = {
   type: 'text',
 }
 
-Input.propTypes = {
-  /** Name specifies for which value within a form this input is */
+TextArea.propTypes = {
+  /** Name specifies for which value within a form this TextArea is */
   name: PropTypes.string.isRequired,
-  /** Type of input field */
+  /** Type of TextArea field */
   type: PropTypes.string,
 }
 
-export { Input }
+export { TextArea }

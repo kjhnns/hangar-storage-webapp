@@ -56,4 +56,8 @@ MenuBar.propTypes = {
   backLink: PropTypes.string,
 }
 
+MenuBar.defaultProps = {
+  backLink: false,
+}
+
 export { MenuBar }

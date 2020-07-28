@@ -19,7 +19,7 @@ const BoxesPage = () => {
           bg: 'gray.100',
         }}
       >
-        <MenuBar stepName="Cadastro de Caixas" stepNo="2" backLink="/person" />
+        <MenuBar stepName="Cadastro de Caixas" stepNo={2} backLink="/person" />
         <Boxes />
 
         <Flex my={2} justifyContent="center">

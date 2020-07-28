@@ -1,21 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
-import { navigate } from 'gatsby'
 import { withFormik } from 'formik'
 
 import { Box, Flex } from '@components/Grid'
 import { Button } from '@components/Button'
 import { Heading, Text } from '@components/Typography'
-import { Form, Input } from '@components/Form'
+import { Form, Input, TextArea } from '@components/Form'
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
-  cpf: Yup.string().required('Required'),
-  phone: Yup.string().required('Required'),
+  serialNo: Yup.string().required('Required'),
+  seal01: Yup.string().required('Required'),
+  seal02: Yup.string().required('Required'),
+  description: Yup.string().required('Required'),
 })
 
-const PurePersonalInformation = ({ errors, handleSubmit }) => (
+const PureAddBox = ({ errors, handleSubmit, closeModal }) => (
   <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
     <Box
       sx={{
@@ -29,19 +29,23 @@ const PurePersonalInformation = ({ errors, handleSubmit }) => (
       }}
     >
       <Heading textAlign="center" as="h1">
-        Informações Pessoais
+        Add Box
       </Heading>
       <Box my={2}>
-        <Text>Nome*</Text>
-        <Input type="text" name="name" />
+        <Text>Etiqueta Caixa*</Text>
+        <Input type="text" name="serialNo" />
       </Box>
       <Box my={2}>
-        <Text>CPF*</Text>
-        <Input type="text" name="cpf" />
+        <Text>Lacre #1*</Text>
+        <Input type="text" name="seal01" />
       </Box>
       <Box my={2}>
-        <Text>Celular*</Text>
-        <Input type="text" name="phone" />
+        <Text>Lacre #2*</Text>
+        <Input type="text" name="seal02" />
+      </Box>
+      <Box my={2}>
+        <Text>Descrição*</Text>
+        <TextArea type="text" name="description" />
       </Box>
       {errors.response && (
         <Box
@@ -57,23 +61,32 @@ const PurePersonalInformation = ({ errors, handleSubmit }) => (
           <Text>{errors.response}</Text>
         </Box>
       )}
-      <Flex my={2} justifyContent="center">
-        <Button type="submit">Avançar</Button>
+      <Flex
+        my={2}
+        flexDirection={['column', 'row', 'row']}
+        justifyContent="center"
+      >
+        <Button type="submit">Add</Button>
+        <Button variant="clear" onClick={closeModal}>
+          cancel
+        </Button>
       </Flex>
     </Box>
   </Form>
 )
 
-const PersonalInformation = withFormik({
+const AddBox = withFormik({
   mapPropsToValues: () => ({
-    nome: '',
-    cpf: '',
-    phone: '',
+    serialNo: '',
+    seal01: '',
+    seal02: '',
+    description: '',
   }),
   validationSchema,
-  handleSubmit: async (values, { setSubmitting, setErrors }) => {
+  handleSubmit: async (values, { props: { closeModal }, setErrors }) => {
+    console.log('ADDDD')
+    console.log(values)
     setErrors({ response: '' })
-    setSubmitting(true)
     // const result = await updateEmail(values)
     // if (!result.success) {
     //   setErrors({ response: result.description.message })
@@ -85,16 +98,17 @@ const PersonalInformation = withFormik({
     //   })
     //   await navigate('/settings')
     // }
-    await navigate('/boxes')
-    setSubmitting(false)
+    closeModal()
   },
-  displayName: 'Personal Information',
-})(PurePersonalInformation)
 
-PurePersonalInformation.propTypes = {
+  displayName: 'Add Box',
+})(PureAddBox)
+
+PureAddBox.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.any.isRequired,
+  closeModal: PropTypes.func.isRequired,
 }
 
-export { PersonalInformation, PurePersonalInformation }
+export { AddBox, PureAddBox }
