@@ -33,7 +33,7 @@ const Boxes = () => {
         serialNo="789351235"
         seal01={654312}
         seal02={123545}
-        description="gdfgfdgdf fsdjfdsjlk fjdslkf jdslkjf lkdsjf"
+        description="gdfgfdgdf "
       />
       <Card
         serialNo="789351235"
@@ -42,7 +42,6 @@ const Boxes = () => {
         description="asdjflkdshjfdj fsdjfdsjlk fjdslkf jdslkjf lkdsjf"
       />
       <AddModal />
-
       <Flex sx={nextButtonStyle}>
         <Button as={Link} to="/confirmation">
           Avançar

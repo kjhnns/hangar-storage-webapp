@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Box } from '@components/Grid'
-import DeleteIcon from './DeleteIcon.svg'
+import { DeleteDialog } from './DeleteDialog'
 
 const labelTableStyle = {
   color: 'primary.800',
@@ -45,9 +45,11 @@ const Card = ({ serialNo, seal01, seal02, description }) => (
       <Box sx={labelTableStyle}>Descrição</Box>
       <Box sx={valueTableStyle}>{description}</Box>
     </Box>
-    <Box>
-      <img src={DeleteIcon} alt="remover" sx={{ fill: 'red.500' }} />
-    </Box>
+    <DeleteDialog
+      deleteHandler={async () => {
+        console.log('tchua')
+      }}
+    />
   </Box>
 )
 
