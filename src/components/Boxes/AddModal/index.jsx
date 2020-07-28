@@ -36,11 +36,7 @@ const AddModal = () => {
   return (
     <Box>
       <AddButton onClick={open}>+</AddButton>
-      <ResponsiveDialog
-        aria-label="Add Box"
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
         <AddBox closeModal={close} />
       </ResponsiveDialog>
     </Box>
