@@ -35,8 +35,18 @@ const IndexPage = () => {
           <Heading as="h1" sx={{ textTransform: 'uppercase' }}>
             Hangar Storage
           </Heading>
-          <Text my={3} color="gray.900">
-            Success – done!
+          <Text my={3} color="primary.700">
+            Pronto!
+          </Text>
+          <Text color="gray.900" px={[4, 4, 6]} py={2} textAlign="center">
+            O seu inventário foi enviado e está registrado nos nossos
+            servidores.
+          </Text>
+          <Text color="gray.900" px={[4, 4, 6]} py={2} textAlign="center">
+            Você também irá receber uma mensagem no seu WhatsApp com os números
+            das etiquetas de suas caixas. Caso deseje receber o relatório
+            completo, com número de lacres e descrição de conteúdo, solicite
+            através de nossos canais de atendimento.
           </Text>
         </Box>
       </Box>

@@ -1,12 +1,13 @@
 import React from 'react'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import styled from '@emotion/styled'
-import { Card } from './Card'
 import { Box } from '@components/Grid'
+import { Card } from './Card'
 
 const AddButton = styled.button`
-  position: absolute;
-  top: 60px;
-  left: calc(80% - 60px);
+  position: fixed;
+  right: calc(50% - 450px);
+  top: 55px;
   width: 60px;
   height: 60px;
   border-radius: 100%;
@@ -24,6 +25,15 @@ const AddButton = styled.button`
 
   &:focus {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 2px 2px rgba(0, 0, 0, 0.23);
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    top: inherit;
+    bottom: 23px;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.xl}) {
+    right: 23px;
   }
 `
 

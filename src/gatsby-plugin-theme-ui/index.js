@@ -18,7 +18,6 @@ breakpoints.xl = breakpoints[3]
 const colors = {
   text: 'hsl(0, 0%, 0%)',
   background: '#0f0',
-  primary: 'hsl(0, 0%, 0%)',
   secondary: 'hsl(10, 2%, 30%)',
   accent: 'pink',
   highlight: 'yellow',
@@ -130,15 +129,6 @@ const buttons = {
     variant: 'buttons.primary',
     color: 'black',
     bg: 'gray.300',
-  },
-  remove: {
-    variant: 'buttons.outline',
-    color: 'white',
-    bg: 'red.500',
-    boxShadow: 0,
-    p: 2,
-    minWidth: 'none',
-    fontSize: 1,
   },
   outline: {
     variant: 'buttons.primary',

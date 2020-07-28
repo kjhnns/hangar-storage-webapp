@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Button } from '@components/Button'
-import { Flex, Box } from '@components/Grid'
+import { Box } from '@components/Grid'
+import DeleteIcon from './DeleteIcon.svg'
 
 const labelTableStyle = {
   color: 'primary.800',
@@ -22,10 +22,16 @@ const Card = () => (
       boxShadow: 'base',
       m: [0, 3, 3],
       mb: 3,
+      display: 'grid',
+      gridTemplateAreas: '"main delete"',
     }}
   >
+    <Box sx={{ gridArea: 'delete' }}>
+      <img src={DeleteIcon} alt="remover" sx={{ fill: 'red.500' }} />
+    </Box>
     <Box
       sx={{
+        gridArea: 'main',
         gridTemplateColumns: ['1fr', '0.5fr 1fr', '0.5fr 1fr'],
         display: 'grid',
         maxWidth: '600px',
@@ -44,9 +50,6 @@ const Card = () => (
         Snowboats, T-Shirts, Ski cloth, hat, bottles,
       </Box>
     </Box>
-    <Flex my={2} justifyContent="center">
-      <Button variant="remove">remover</Button>
-    </Flex>
   </Box>
 )
 
