@@ -10,10 +10,16 @@ import { AddBox } from './AddBox'
 
 const ResponsiveDialog = styled(Dialog)`
   width: 100vw;
+  min-height: 100vw;
+  padding: 10vh 0;
+  margin: 0;
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     width: 80vw;
     border-radius: ${props => `'${props.theme.radii.default}px'`};
+    padding: 2rem;
+    margin: 10vh auto;
+    min-height: inherit;
   }
 
   @media (min-width: ${props => props.theme.breakpoints.lg}) {

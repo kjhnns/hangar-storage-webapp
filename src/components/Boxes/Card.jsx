@@ -25,6 +25,8 @@ const Card = ({ serialNo, seal01, seal02, description }) => (
       mb: 3,
       display: 'grid',
       gridTemplateAreas: '"main delete"',
+      width: '100%',
+      maxWidth: '600px',
     }}
   >
     <Box sx={{ gridArea: 'delete' }}>

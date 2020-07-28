@@ -27,7 +27,7 @@ const AddButton = styled.button`
   @media (max-width: ${props => props.theme.breakpoints.sm}) {
     position: fixed;
     top: inherit;
-    bottom: 23px;
+    bottom: 83px;
   }
 
   @media (max-width: ${props => props.theme.breakpoints.xl}) {
