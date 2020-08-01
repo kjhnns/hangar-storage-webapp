@@ -7,23 +7,20 @@ import { Text } from '@components/Typography'
 import { Card } from './Card'
 import { AddModal } from './AddModal'
 
-const CardController = {}
-
-CardController.add = async (
-  list,
-  { serialNo, seal01, seal02, description }
-) => {
-  const duplicates = list.filter(
-    ({ serialNo: itemSerialNo }) => itemSerialNo === serialNo
-  )
-  if (duplicates.length <= 0) {
-    return [{ serialNo, seal01, seal02, description }, ...list]
-  }
-  return list
+const CardController = {
+  isDuplicate: async (list, serialNo) => {
+    const duplicates = list.filter(
+      ({ serialNo: itemSerialNo }) => itemSerialNo === serialNo
+    )
+    return duplicates.length > 0
+  },
+  add: async (list, { serialNo, seal01, seal02, description }) => [
+    { serialNo, seal01, seal02, description },
+    ...list,
+  ],
+  delete: async (list, serialNo) =>
+    list.filter(val => val.serialNo !== serialNo),
 }
-
-CardController.delete = async (list, serialNo) =>
-  list.filter(val => val.serialNo !== serialNo)
 
 const nextButtonStyle = {
   justifyContent: 'center',
@@ -39,18 +36,27 @@ const nextButtonStyle = {
 const Boxes = () => {
   const [CardList, setCardList] = useState([])
 
+  const addCardHandler = async ({ serialNo, seal01, seal02, description }) => {
+    if (await CardController.isDuplicate(CardList, serialNo)) {
+      return { success: false }
+    }
+    const newList = await CardController.add(CardList, {
+      serialNo,
+      seal01,
+      seal02,
+      description,
+    })
+    await setCardList(newList)
+    return { success: true }
+  }
+
   if (CardList.length <= 0) {
     return (
       <Box>
         <Text color="gray.900" py={4} textAlign="center">
           Preciso seus caixas
         </Text>
-        <AddModal
-          addCardHandler={async values => {
-            const newList = await CardController.add(CardList, values)
-            await setCardList(newList)
-          }}
-        />
+        <AddModal addCardHandler={addCardHandler} />
         <Flex sx={nextButtonStyle}>
           <Button variant="disabled">Avançar</Button>
         </Flex>
@@ -82,12 +88,7 @@ const Boxes = () => {
           }}
         />
       ))}
-      <AddModal
-        addCardHandler={async values => {
-          const newList = await CardController.add(CardList, values)
-          await setCardList(newList)
-        }}
-      />
+      <AddModal addCardHandler={addCardHandler} />
       <Flex sx={nextButtonStyle}>
         <Button as={Link} to="/confirmation">
           Avançar

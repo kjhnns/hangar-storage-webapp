@@ -14,6 +14,7 @@ const labelTableStyle = {
 
 const valueTableStyle = {
   p: 2,
+  wordBreak: 'break-all',
 }
 
 const Card = ({ serialNo, seal01, seal02, description, deleteCardHandler }) => (

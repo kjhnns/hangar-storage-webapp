@@ -11,10 +11,18 @@ import { Form, Input, TextArea } from '@components/Form'
 // https://codesandbox.io/s/lyr3nq0vlm?file=/src/Scanner.js
 
 const validationSchema = Yup.object().shape({
-  serialNo: Yup.string().required('Required'),
-  seal01: Yup.string().required('Required'),
-  seal02: Yup.string().required('Required'),
-  description: Yup.string().required('Required'),
+  serialNo: Yup.string()
+    .max(20, 'Maximum 20 characters')
+    .required('Required'),
+  seal01: Yup.string()
+    .max(20, 'Maximum 20 characters')
+    .required('Required'),
+  seal02: Yup.string()
+    .max(20, 'Maximum 20 characters')
+    .required('Required'),
+  description: Yup.string()
+    .max(400, 'Maximum 400 characters')
+    .required('Required'),
 })
 
 const PureAddBox = ({ errors, handleSubmit, closeModal }) => (
@@ -90,19 +98,14 @@ const AddBox = withFormik({
     { props: { closeModal, addCardHandler }, setErrors }
   ) => {
     await setErrors({ response: '' })
-    // const result = await updateEmail(values)
-    // if (!result.success) {
-    //   setErrors({ response: result.description.message })
-    // }
-    // if (result.success) {
-    //   await handleLogin({
-    //     email: await getUser().email,
-    //     password: values.password,
-    //   })
-    //   await navigate('/settings')
-    // }
-    await addCardHandler(values)
-    await closeModal()
+    const result = await addCardHandler(values)
+    if (result.success) {
+      await closeModal()
+    } else {
+      await setErrors({
+        response: 'Sorry but the Etiqueta Caixa needs to be unique',
+      })
+    }
   },
 
   displayName: 'Add Box',

@@ -82,17 +82,6 @@ const PersonalInformation = withFormik({
   handleSubmit: async (values, { setSubmitting, setErrors }) => {
     setErrors({ response: '' })
     setSubmitting(true)
-    // const result = await updateEmail(values)
-    // if (!result.success) {
-    //   setErrors({ response: result.description.message })
-    // }
-    // if (result.success) {
-    //   await handleLogin({
-    //     email: await getUser().email,
-    //     password: values.password,
-    //   })
-    //   await navigate('/settings')
-    // }
     await localStorage.setItem('personalInformation', JSON.stringify(values))
     await navigate('/boxes')
     setSubmitting(false)
