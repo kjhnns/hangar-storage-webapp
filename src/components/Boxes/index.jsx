@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 
 import { Button } from '@components/Button'
@@ -36,6 +36,25 @@ const nextButtonStyle = {
 const Boxes = () => {
   const [CardList, setCardList] = useState([])
 
+  useEffect(() => {
+    const loadLocalStorage = async () => {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        if (localStorage.getItem('boxes')) {
+          setCardList(JSON.parse(localStorage.getItem('boxes')))
+        }
+      }
+    }
+    loadLocalStorage()
+  }, [])
+
+  const deleteCardHandler = async serialNo => {
+    const newList = await CardController.delete(CardList, serialNo)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      await localStorage.setItem('boxes', JSON.stringify(newList))
+    }
+    await setCardList(newList)
+  }
+
   const addCardHandler = async ({ serialNo, seal01, seal02, description }) => {
     if (await CardController.isDuplicate(CardList, serialNo)) {
       return { success: false }
@@ -46,6 +65,9 @@ const Boxes = () => {
       seal02,
       description,
     })
+    if (typeof window !== 'undefined' && window.localStorage) {
+      await localStorage.setItem('boxes', JSON.stringify(newList))
+    }
     await setCardList(newList)
     return { success: true }
   }
@@ -82,10 +104,7 @@ const Boxes = () => {
           seal01={seal01}
           seal02={seal02}
           description={description}
-          deleteCardHandler={async () => {
-            const newList = await CardController.delete(CardList, serialNo)
-            await setCardList(newList)
-          }}
+          deleteCardHandler={() => deleteCardHandler(serialNo)}
         />
       ))}
       <AddModal addCardHandler={addCardHandler} />

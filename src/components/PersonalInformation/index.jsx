@@ -66,11 +66,13 @@ const PurePersonalInformation = ({ errors, handleSubmit }) => (
 
 const PersonalInformation = withFormik({
   mapPropsToValues: () => {
-    if (localStorage.getItem('personalInformation')) {
-      const { name, cpf, phone } = JSON.parse(
-        localStorage.getItem('personalInformation')
-      )
-      return { name, cpf, phone }
+    if (typeof window !== 'undefined' && window.localStorage) {
+      if (localStorage.getItem('personalInformation')) {
+        const { name, cpf, phone } = JSON.parse(
+          localStorage.getItem('personalInformation')
+        )
+        return { name, cpf, phone }
+      }
     }
     return {
       name: '',
@@ -82,7 +84,9 @@ const PersonalInformation = withFormik({
   handleSubmit: async (values, { setSubmitting, setErrors }) => {
     setErrors({ response: '' })
     setSubmitting(true)
-    await localStorage.setItem('personalInformation', JSON.stringify(values))
+    if (typeof window !== 'undefined' && window.localStorage) {
+      await localStorage.setItem('personalInformation', JSON.stringify(values))
+    }
     await navigate('/boxes')
     setSubmitting(false)
   },
