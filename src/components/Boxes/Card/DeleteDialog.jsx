@@ -44,7 +44,14 @@ const DeleteDialog = ({ deleteHandler }) => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Button onClick={deleteHandler}>Delete</Button>
+            <Button
+              onClick={async () => {
+                await deleteHandler()
+                await close()
+              }}
+            >
+              Delete
+            </Button>
             <Button variant="clear" onClick={close}>
               cancel
             </Button>

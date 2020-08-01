@@ -1,5 +1,6 @@
 import '@reach/dialog/styles.css'
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled from '@emotion/styled'
 import { Dialog } from '@reach/dialog'
@@ -28,7 +29,7 @@ const ResponsiveDialog = styled(Dialog)`
   }
 `
 
-const AddModal = () => {
+const AddModal = ({ addCardHandler }) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -37,9 +38,14 @@ const AddModal = () => {
     <Box>
       <AddButton onClick={open}>+</AddButton>
       <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
-        <AddBox closeModal={close} />
+        <AddBox addCardHandler={addCardHandler} closeModal={close} />
       </ResponsiveDialog>
     </Box>
   )
 }
+
+AddModal.propTypes = {
+  addCardHandler: PropTypes.func.isRequired,
+}
+
 export { AddModal }

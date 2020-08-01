@@ -125,6 +125,17 @@ const buttons = {
     minWidth: '200px',
     borderRadius: 'default',
   },
+  disabled: {
+    fontFamily: 'body',
+    fontSize: 2,
+    fontWeight: '300',
+    color: 'white',
+    bg: 'primary.400',
+    px: 3,
+    py: 3,
+    minWidth: '200px',
+    borderRadius: 'default',
+  },
   secondary: {
     variant: 'buttons.primary',
     color: 'black',

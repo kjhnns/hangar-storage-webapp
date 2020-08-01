@@ -6,6 +6,8 @@ import { DeleteDialog } from './DeleteDialog'
 
 const labelTableStyle = {
   color: 'primary.800',
+  // textDecoration: 'underline',
+  fontWeight: 300,
   p: 2,
   textAlign: ['inherit', 'right', 'right'],
 }
@@ -14,7 +16,7 @@ const valueTableStyle = {
   p: 2,
 }
 
-const Card = ({ serialNo, seal01, seal02, description }) => (
+const Card = ({ serialNo, seal01, seal02, description, deleteCardHandler }) => (
   <Box
     sx={{
       bg: 'white',
@@ -45,19 +47,16 @@ const Card = ({ serialNo, seal01, seal02, description }) => (
       <Box sx={labelTableStyle}>Descrição</Box>
       <Box sx={valueTableStyle}>{description}</Box>
     </Box>
-    <DeleteDialog
-      deleteHandler={async () => {
-        console.log('tchua')
-      }}
-    />
+    <DeleteDialog deleteHandler={() => deleteCardHandler(serialNo)} />
   </Box>
 )
 
 Card.propTypes = {
   serialNo: PropTypes.string.isRequired,
-  seal01: PropTypes.number.isRequired,
-  seal02: PropTypes.number.isRequired,
+  seal01: PropTypes.string.isRequired,
+  seal02: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  deleteCardHandler: PropTypes.func.isRequired,
 }
 
 export { Card }

@@ -8,6 +8,8 @@ import { Button } from '@components/Button'
 import { Heading, Text } from '@components/Typography'
 import { Form, Input, TextArea } from '@components/Form'
 
+// https://codesandbox.io/s/lyr3nq0vlm?file=/src/Scanner.js
+
 const validationSchema = Yup.object().shape({
   serialNo: Yup.string().required('Required'),
   seal01: Yup.string().required('Required'),
@@ -83,10 +85,11 @@ const AddBox = withFormik({
     description: '',
   }),
   validationSchema,
-  handleSubmit: async (values, { props: { closeModal }, setErrors }) => {
-    console.log('ADDDD')
-    console.log(values)
-    setErrors({ response: '' })
+  handleSubmit: async (
+    values,
+    { props: { closeModal, addCardHandler }, setErrors }
+  ) => {
+    await setErrors({ response: '' })
     // const result = await updateEmail(values)
     // if (!result.success) {
     //   setErrors({ response: result.description.message })
@@ -98,7 +101,8 @@ const AddBox = withFormik({
     //   })
     //   await navigate('/settings')
     // }
-    closeModal()
+    await addCardHandler(values)
+    await closeModal()
   },
 
   displayName: 'Add Box',
