@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
-
+import axios from 'axios'
+import { navigate } from 'gatsby'
 import { Button } from '@components/Button'
 import { Flex, Box } from '@components/Grid'
 import { Text } from '@components/Typography'
@@ -22,6 +22,27 @@ const CardController = {
     list.filter(val => val.serialNo !== serialNo),
 }
 
+const sendForm = async () => {
+  if (
+    typeof window !== 'undefined' &&
+    window.sessionStorage &&
+    window.localStorage
+  ) {
+    const boxes = JSON.parse(sessionStorage.getItem('boxes'))
+    const personalInformation = JSON.parse(
+      localStorage.getItem('personalInformation')
+    )
+
+    const response = await axios.post(`${process.env.GATSBY_LAMBDA_URL}/save`, {
+      boxes,
+      personalInformation,
+    })
+    if (response.status === 200) {
+      await navigate('/confirmation')
+    }
+  }
+}
+
 const nextButtonStyle = {
   justifyContent: 'center',
   bg: 'white',
@@ -38,9 +59,9 @@ const Boxes = () => {
 
   useEffect(() => {
     const loadLocalStorage = async () => {
-      if (typeof window !== 'undefined' && window.localStorage) {
-        if (localStorage.getItem('boxes')) {
-          setCardList(JSON.parse(localStorage.getItem('boxes')))
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        if (sessionStorage.getItem('boxes')) {
+          setCardList(JSON.parse(sessionStorage.getItem('boxes')))
         }
       }
     }
@@ -49,8 +70,8 @@ const Boxes = () => {
 
   const deleteCardHandler = async serialNo => {
     const newList = await CardController.delete(CardList, serialNo)
-    if (typeof window !== 'undefined' && window.localStorage) {
-      await localStorage.setItem('boxes', JSON.stringify(newList))
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      await sessionStorage.setItem('boxes', JSON.stringify(newList))
     }
     await setCardList(newList)
   }
@@ -65,8 +86,8 @@ const Boxes = () => {
       seal02,
       description,
     })
-    if (typeof window !== 'undefined' && window.localStorage) {
-      await localStorage.setItem('boxes', JSON.stringify(newList))
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      await sessionStorage.setItem('boxes', JSON.stringify(newList))
     }
     await setCardList(newList)
     return { success: true }
@@ -109,9 +130,7 @@ const Boxes = () => {
       ))}
       <AddModal addCardHandler={addCardHandler} />
       <Flex sx={nextButtonStyle}>
-        <Button as={Link} to="/confirmation">
-          Avançar
-        </Button>
+        <Button onClick={sendForm}>Avançar</Button>
       </Flex>
     </Box>
   )

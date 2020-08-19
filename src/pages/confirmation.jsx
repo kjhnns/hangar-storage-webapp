@@ -7,6 +7,10 @@ import { Box } from '@components/Grid'
 import { Heading, Text } from '@components/Typography'
 
 const IndexPage = () => {
+  if (typeof window !== 'undefined' && window.sessionStorage) {
+    sessionStorage.removeItem('boxes')
+  }
+
   return (
     <Layout>
       <SEO />
