@@ -84,7 +84,6 @@ const PersonalInformation = withFormik({
   handleSubmit: async (values, { setSubmitting, setErrors }) => {
     setErrors({ response: '' })
     setSubmitting(true)
-    console.log(values)
     if (typeof window !== 'undefined' && window.localStorage) {
       await localStorage.setItem('personalInformation', JSON.stringify(values))
     }
