@@ -7,7 +7,7 @@ import { withFormik } from 'formik'
 import { Box, Flex } from '@components/Grid'
 import { Button } from '@components/Button'
 import { Heading, Text } from '@components/Typography'
-import { Form, Input, CPF } from '@components/Form'
+import { Form, Input, CPF as CPFInput } from '@components/Form'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -37,7 +37,7 @@ const PurePersonalInformation = ({ errors, handleSubmit }) => (
       </Box>
       <Box my={2}>
         <Text>CPF*</Text>
-        <CPF type="text" name="cpf" />
+        <CPFInput type="text" name="cpf" />
       </Box>
       <Box my={2}>
         <Text>Celular*</Text>
@@ -84,6 +84,7 @@ const PersonalInformation = withFormik({
   handleSubmit: async (values, { setSubmitting, setErrors }) => {
     setErrors({ response: '' })
     setSubmitting(true)
+    console.log(values)
     if (typeof window !== 'undefined' && window.localStorage) {
       await localStorage.setItem('personalInformation', JSON.stringify(values))
     }

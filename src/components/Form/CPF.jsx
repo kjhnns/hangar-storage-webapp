@@ -10,6 +10,7 @@ import { Text } from '@components/Typography'
 const StyledInput = props => (
   <RebassInput
     {...props}
+    type="text"
     sx={{
       borderRadius: 'default',
       boxShadow: 'primaryBase',
@@ -19,7 +20,7 @@ const StyledInput = props => (
   />
 )
 
-const MaskedStyledInput = () => (
+const MaskedStyledInput = props => (
   <MaskedInput
     mask={[
       /\d/,
@@ -38,31 +39,26 @@ const MaskedStyledInput = () => (
       /\d/,
     ]}
     placeholder="___.___.___-__"
-    render={(ref, props) => <StyledInput innerRef={ref} {...props} />}
+    render={(ref, innerProps) => <StyledInput innerRef={ref} {...innerProps} />}
+    {...props}
   />
 )
 
-const CPF = ({ type, ...props }) => {
+const CPF = ({ ...props }) => {
   const [field, meta] = useField(props)
   const { name } = props
 
   return (
     <>
-      <MaskedStyledInput type={type} id={name} {...field} {...props} />
+      <MaskedStyledInput id={name} {...field} {...props} />
       {meta.touched && meta.error ? <Text>{meta.error}</Text> : null}
     </>
   )
 }
 
-CPF.defaultProps = {
-  type: 'text',
-}
-
 CPF.propTypes = {
   /** Name specifies for which value within a form this input is */
   name: PropTypes.string.isRequired,
-  /** Type of input field */
-  type: PropTypes.string,
 }
 
 export { CPF }

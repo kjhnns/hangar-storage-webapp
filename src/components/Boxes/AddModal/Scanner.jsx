@@ -28,7 +28,7 @@ const Scanner = class Scanner extends React.Component {
           type: 'LiveStream',
           constraints: {
             width: 640,
-            height: 480,
+            height: 240,
             facingMode: 'environment', // or user
           },
         },
