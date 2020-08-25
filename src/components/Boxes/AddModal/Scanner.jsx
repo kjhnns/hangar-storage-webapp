@@ -18,6 +18,18 @@ const VideoViewport = styled.div`
     top: 0;
     position: absolute;
   }
+
+  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    video {
+      width: 80%;
+      margin-left: 10%;
+    }
+
+    canvas {
+      width: 80%;
+      margin-left: 10%;
+    }
+  }
 `
 
 const Scanner = class Scanner extends React.Component {
@@ -28,7 +40,7 @@ const Scanner = class Scanner extends React.Component {
           type: 'LiveStream',
           constraints: {
             width: 640,
-            height: 240,
+            height: 480,
             facingMode: 'environment', // or user
           },
         },

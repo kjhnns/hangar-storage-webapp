@@ -43,17 +43,19 @@ const AddModal = ({ addCardHandler }) => {
       <Box>
         <AddButton onClick={open} />
         <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
-          <Heading textAlign="center" as="h1">
-            Scan Bar Code
-          </Heading>
-          <Scanner
-            onDetected={barCode => {
-              setSerialNo(barCode)
-              setScanning(false)
-            }}
-          />
-          <Flex justifyContent="center">
-            <Button onClick={() => setScanning(false)}>Stop</Button>
+          <Flex flexDirection="column" alignItems="center">
+            <Heading textAlign="center" as="h1">
+              Scan Barcode
+            </Heading>
+            <Scanner
+              onDetected={barCode => {
+                setSerialNo(barCode)
+                setScanning(false)
+              }}
+            />
+            <Box>
+              <Button onClick={() => setScanning(false)}>Stop</Button>
+            </Box>
           </Flex>
         </ResponsiveDialog>
       </Box>
