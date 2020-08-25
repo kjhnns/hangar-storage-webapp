@@ -9,10 +9,8 @@ import { Heading, Text } from '@components/Typography'
 import { Button } from '@components/Button'
 
 const stepBoxStyle = {
-  bg: 'primary.100',
   my: 2,
-  px: 4,
-  py: 3,
+  py: 2,
   alignItems: 'center',
   display: 'flex',
   textAlign: 'left',
@@ -50,7 +48,19 @@ const IndexPage = () => {
           <Text my={3} color="gray.900">
             Steps to register your boxes:
           </Text>
-          <Flex flexDirection="column">
+          <Flex
+            flexDirection="column"
+            sx={{
+              bg: 'gray.200',
+              borderRadius: 1,
+              my: 2,
+              px: 5,
+              py: 1,
+              alignItems: 'center',
+              display: 'flex',
+              textAlign: 'left',
+            }}
+          >
             <Box sx={stepBoxStyle}>1. Informações Pessoais</Box>
             <Box sx={stepBoxStyle}>2. Cadastro de Caixas</Box>
             <Box sx={stepBoxStyle}>3. Solicitar Entrega/Coleta</Box>
