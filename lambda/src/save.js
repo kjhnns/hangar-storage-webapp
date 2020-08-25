@@ -2,7 +2,7 @@
 /* eslint-disable compat/compat */
 const Airtable = require('airtable')
 
-// const emails = require('./helper/emails')
+const emails = require('./helper/emails')
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -56,12 +56,16 @@ exports.handler = async event => {
         Description: item.description || '',
         Name: personalInformation.name || '',
         CPF: personalInformation.cpf || '',
-        Phone: personalInformation.phone || '',
+        Phone: personalInformation.email || '',
       },
     }))
 
     try {
       await saveBoxes(formattedData)
+      await emails.send({
+        personalInformation,
+        boxes,
+      })
     } catch (error) {
       const responseBody = JSON.stringify({
         status: 'fail',

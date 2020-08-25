@@ -19,7 +19,7 @@ const VideoViewport = styled.div`
     position: absolute;
   }
 
-  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
     video {
       width: 80%;
       margin-left: 10%;

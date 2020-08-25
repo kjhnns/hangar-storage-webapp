@@ -12,7 +12,9 @@ import { Form, Input, CPF as CPFInput } from '@components/Form'
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
   cpf: Yup.string().required('Required'),
-  phone: Yup.string().required('Required'),
+  email: Yup.string()
+    .email('You need to provide a valid email address')
+    .required('Required'),
 })
 
 const PurePersonalInformation = ({ errors, handleSubmit }) => (
@@ -40,8 +42,8 @@ const PurePersonalInformation = ({ errors, handleSubmit }) => (
         <CPFInput type="text" name="cpf" />
       </Box>
       <Box my={2}>
-        <Text>Celular*</Text>
-        <Input type="text" name="phone" />
+        <Text>Email*</Text>
+        <Input type="email" name="email" />
       </Box>
       {errors.response && (
         <Box
@@ -68,16 +70,16 @@ const PersonalInformation = withFormik({
   mapPropsToValues: () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       if (localStorage.getItem('personalInformation')) {
-        const { name, cpf, phone } = JSON.parse(
+        const { name, cpf, email } = JSON.parse(
           localStorage.getItem('personalInformation')
         )
-        return { name, cpf, phone }
+        return { name, cpf, email }
       }
     }
     return {
       name: '',
       cpf: '',
-      phone: '',
+      email: '',
     }
   },
   validationSchema,

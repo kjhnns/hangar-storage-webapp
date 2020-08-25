@@ -67,11 +67,13 @@ const Boxes = () => {
           personalInformation,
         }
       )
+
       if (response.status === 200) {
         await navigate('/confirmation')
+      } else {
+        setSubmitting(false)
       }
     }
-    setSubmitting(false)
   }
 
   const deleteCardHandler = async serialNo => {
