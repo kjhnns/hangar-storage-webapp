@@ -53,6 +53,7 @@
     "moment": "^2.24.0",
     "netlify-lambda": "^2.0.1",
     "prop-types": "^15.7.2",
+    "quagga": "^0.12.1",
     "react": "16.13.1",
     "react-dom": "16.12.0",
     "react-ga": "^2.7.0",

@@ -22,27 +22,6 @@ const CardController = {
     list.filter(val => val.serialNo !== serialNo),
 }
 
-const sendForm = async () => {
-  if (
-    typeof window !== 'undefined' &&
-    window.sessionStorage &&
-    window.localStorage
-  ) {
-    const boxes = JSON.parse(sessionStorage.getItem('boxes'))
-    const personalInformation = JSON.parse(
-      localStorage.getItem('personalInformation')
-    )
-
-    const response = await axios.post(`${process.env.GATSBY_LAMBDA_URL}/save`, {
-      boxes,
-      personalInformation,
-    })
-    if (response.status === 200) {
-      await navigate('/confirmation')
-    }
-  }
-}
-
 const nextButtonStyle = {
   justifyContent: 'center',
   bg: 'white',
@@ -56,6 +35,7 @@ const nextButtonStyle = {
 
 const Boxes = () => {
   const [CardList, setCardList] = useState([])
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     const loadLocalStorage = async () => {
@@ -67,6 +47,32 @@ const Boxes = () => {
     }
     loadLocalStorage()
   }, [])
+
+  const SubmitForm = async () => {
+    setSubmitting(true)
+    if (
+      typeof window !== 'undefined' &&
+      window.sessionStorage &&
+      window.localStorage
+    ) {
+      const boxes = JSON.parse(sessionStorage.getItem('boxes'))
+      const personalInformation = JSON.parse(
+        localStorage.getItem('personalInformation')
+      )
+
+      const response = await axios.post(
+        `${process.env.GATSBY_LAMBDA_URL}/save`,
+        {
+          boxes,
+          personalInformation,
+        }
+      )
+      if (response.status === 200) {
+        await navigate('/confirmation')
+      }
+    }
+    setSubmitting(false)
+  }
 
   const deleteCardHandler = async serialNo => {
     const newList = await CardController.delete(CardList, serialNo)
@@ -97,7 +103,7 @@ const Boxes = () => {
     return (
       <Box>
         <Text color="gray.900" py={4} textAlign="center">
-          Preciso seus caixas
+          Preciso suas caixas
         </Text>
         <AddModal addCardHandler={addCardHandler} />
         <Flex sx={nextButtonStyle}>
@@ -130,7 +136,9 @@ const Boxes = () => {
       ))}
       <AddModal addCardHandler={addCardHandler} />
       <Flex sx={nextButtonStyle}>
-        <Button onClick={sendForm}>Avançar</Button>
+        <Button onClick={SubmitForm}>
+          {submitting ? 'Avançar ...' : 'Avançar'}
+        </Button>
       </Flex>
     </Box>
   )

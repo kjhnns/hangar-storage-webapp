@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
     .required('Required'),
 })
 
-const PureAddBox = ({ errors, handleSubmit, closeModal }) => (
+const PureAddBox = ({ errors, handleSubmit, closeModal, startScanner }) => (
   <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
     <Box
       sx={{
@@ -43,7 +43,16 @@ const PureAddBox = ({ errors, handleSubmit, closeModal }) => (
       </Heading>
       <Box my={2}>
         <Text>Etiqueta Caixa*</Text>
-        <Input type="text" name="serialNo" />
+        <Flex flexDirection="row">
+          <Box flex="1">
+            <Input type="text" name="serialNo" />
+          </Box>
+          <Box ml={2}>
+            <Button sx={{ minWidth: 'auto' }} onClick={startScanner}>
+              Scan
+            </Button>
+          </Box>
+        </Flex>
       </Box>
       <Box my={2}>
         <Text>Lacre #1*</Text>
@@ -86,8 +95,8 @@ const PureAddBox = ({ errors, handleSubmit, closeModal }) => (
 )
 
 const AddBox = withFormik({
-  mapPropsToValues: () => ({
-    serialNo: '',
+  mapPropsToValues: ({ serialNo }) => ({
+    serialNo,
     seal01: '',
     seal02: '',
     description: '',
@@ -115,6 +124,7 @@ PureAddBox.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.any.isRequired,
+  startScanner: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 }
 

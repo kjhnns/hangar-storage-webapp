@@ -1,20 +1,27 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled from '@emotion/styled'
+import PlusIcon from './PlusIcon.svg'
 
-const AddButton = styled.button`
+const Button = styled.button`
   position: absolute;
   right: calc(50% - 450px);
   top: 55px;
   width: 60px;
   height: 60px;
-  border-radius: 100%;
+  border-radius: 50px;
   background: ${props => props.theme.colors.primary[700]};
   border: none;
+  text-align: center;
+  line-height: 0;
+  letter-spacing: 0;
   outline: none;
   color: ${props => props.theme.colors.white};
   font-size: 36px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 2px 2px 3px #999;
   transition: 0.3s;
+  padding: 0;
 
   &:hover {
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16), 0 6px 9px rgba(0, 0, 0, 0.23);
@@ -35,18 +42,14 @@ const AddButton = styled.button`
   }
 `
 
-// @media (max-width: ${props => props.theme.breakpoints.sm}) {
-//     position: fixed;
-//     top: inherit;
-//     bottom: 23px;
-//   }
+const AddButton = ({ onClick }) => (
+  <Button onClick={onClick}>
+    <img src={PlusIcon} alt="add" width="25%" />
+  </Button>
+)
 
-//  VERSION B
-// @media (max-width: ${props => props.theme.breakpoints.sm}) {
-//     top: 2px;
-//     transform: scale(0.7);
-//     right: 1px;
-//     box-shadow: none;
-//   }
+AddButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+}
 
 export { AddButton }

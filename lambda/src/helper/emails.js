@@ -1,6 +1,6 @@
 const Mailgun = require('mailgun-js')
 
-const sendConfirmation = async ({ email, firstName }) => {
+const sendConfirmation = async ({ email, name }) => {
   return new Promise((resolve, reject) => {
     const {
       MG_API_KEY: apiKey,

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled from '@emotion/styled'
 import { Dialog } from '@reach/dialog'
-
-import { Box } from '@components/Grid'
+import { Flex, Box } from '@components/Grid'
+import { Button } from '@components/Button'
+import { Heading } from '@components/Typography'
+import { Scanner } from './Scanner'
 import { AddButton } from './AddButton'
 import { AddBox } from './AddBox'
 
@@ -33,12 +35,41 @@ const AddModal = ({ addCardHandler }) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+  const [scanning, setScanning] = useState(false)
+  const [serialNo, setSerialNo] = useState('')
+
+  if (scanning) {
+    return (
+      <Box>
+        <AddButton onClick={open} />
+        <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
+          <Heading textAlign="center" as="h1">
+            Scan Bar Code
+          </Heading>
+          <Scanner
+            onDetected={barCode => {
+              setSerialNo(barCode)
+              setScanning(false)
+            }}
+          />
+          <Flex justifyContent="center">
+            <Button onClick={() => setScanning(false)}>Stop</Button>
+          </Flex>
+        </ResponsiveDialog>
+      </Box>
+    )
+  }
 
   return (
     <Box>
-      <AddButton onClick={open}>+</AddButton>
+      <AddButton onClick={open} />
       <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
-        <AddBox addCardHandler={addCardHandler} closeModal={close} />
+        <AddBox
+          addCardHandler={addCardHandler}
+          startScanner={() => setScanning(true)}
+          serialNo={serialNo}
+          closeModal={close}
+        />
       </ResponsiveDialog>
     </Box>
   )
