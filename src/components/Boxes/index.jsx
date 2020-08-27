@@ -36,6 +36,7 @@ const nextButtonStyle = {
 const Boxes = () => {
   const [CardList, setCardList] = useState([])
   const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     const loadLocalStorage = async () => {
@@ -50,6 +51,7 @@ const Boxes = () => {
 
   const SubmitForm = async () => {
     setSubmitting(true)
+    setErrorMessage(null)
     if (
       typeof window !== 'undefined' &&
       window.sessionStorage &&
@@ -60,17 +62,22 @@ const Boxes = () => {
         localStorage.getItem('personalInformation')
       )
 
-      const response = await axios.post(
-        `${process.env.GATSBY_LAMBDA_URL}/save`,
-        {
-          boxes,
-          personalInformation,
-        }
-      )
+      try {
+        const response = await axios.post(
+          `${process.env.GATSBY_LAMBDA_URL}/save`,
+          {
+            boxes,
+            personalInformation,
+          }
+        )
 
-      if (response.status === 200) {
-        await navigate('/confirmation')
-      } else {
+        if (response.status === 200) {
+          await navigate('/confirmation')
+        } else {
+          setErrorMessage('Unexpected error')
+        }
+      } catch (err) {
+        setErrorMessage(err.message)
         setSubmitting(false)
       }
     }
@@ -126,6 +133,11 @@ const Boxes = () => {
         flexDirection: 'column',
       }}
     >
+      {errorMessage !== null ? (
+        <Text sx={{ color: 'red.800' }}>{errorMessage}</Text>
+      ) : (
+        ''
+      )}
       {CardList.map(({ serialNo, seal01, seal02, description }) => (
         <Card
           key={serialNo}
