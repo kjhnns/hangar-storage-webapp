@@ -23,7 +23,7 @@ const sendConfirmation = async ({ personalInformation, boxes }) => {
           `Descrição: ${item.description || ''}`,
         ].join('\n')
       )
-      .join('-----------\n')
+      .join('\n-----------\n\n')
 
     const mailData = {
       from: `HangarStorage <${fromEmail}>`,
@@ -31,7 +31,7 @@ const sendConfirmation = async ({ personalInformation, boxes }) => {
       subject: '📦 Confirmation Email',
       text: [
         `Hello ${personalInformation.name},\n`,
-        `Here is a list of your boxes:`,
+        `Here is a list of your boxes:\n`,
         `${formattedData}\n`,
         `Best Regards,`,
         `Enzo`,
