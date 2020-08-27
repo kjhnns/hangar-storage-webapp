@@ -10,6 +10,9 @@ import { Text } from '@components/Typography'
 const StyledInput = props => (
   <RebassInput
     {...props}
+    innerRef={null}
+    // eslint-disable-next-line react/prop-types,react/destructuring-assignment
+    ref={props.innerRef}
     type="text"
     sx={{
       borderRadius: 'default',
@@ -39,7 +42,9 @@ const MaskedStyledInput = props => (
       /\d/,
     ]}
     placeholder="___.___.___-__"
-    render={(ref, innerProps) => <StyledInput innerRef={ref} {...innerProps} />}
+    render={(innerRef, innerProps) => (
+      <StyledInput innerRef={innerRef} {...innerProps} />
+    )}
     {...props}
   />
 )
