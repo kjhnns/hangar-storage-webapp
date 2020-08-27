@@ -33,6 +33,10 @@ const VideoViewport = styled.div`
 `
 
 const Scanner = class Scanner extends React.Component {
+  state = {
+    prevScanResult: null,
+  }
+
   componentDidMount() {
     Quagga.init(
       {
@@ -44,26 +48,17 @@ const Scanner = class Scanner extends React.Component {
             facingMode: 'environment', // or user
           },
         },
-        locator: {
-          patchSize: 'medium',
-          halfSample: true,
-        },
+        locator: false,
         numOfWorkers: 2,
         decoder: {
-          readers: ['ean_reader'],
-          debug: {
-            drawBoundingBox: true,
-            showFrequency: false,
-            drawScanline: true,
-            showPattern: false,
-          },
+          readers: ['code_128_reader'],
         },
-        locate: true,
       },
       () => {
         Quagga.start()
       }
     )
+
     Quagga.onDetected(this.onDetected)
   }
 
@@ -74,8 +69,13 @@ const Scanner = class Scanner extends React.Component {
 
   onDetected = result => {
     const { code } = result.codeResult
-    this.props.onDetected(code)
-    Quagga.stop()
+    // Increase accuracy
+    if (this.state.prevScanResult === code) {
+      this.props.onDetected(code)
+      Quagga.stop()
+    } else {
+      this.setState({ prevScanResult: code })
+    }
   }
 
   render() {
