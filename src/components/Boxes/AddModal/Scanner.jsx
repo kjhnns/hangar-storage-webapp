@@ -33,8 +33,11 @@ const VideoViewport = styled.div`
 `
 
 const Scanner = class Scanner extends React.Component {
-  state = {
-    prevScanResult: null,
+  constructor(props) {
+    super(props)
+    this.state = {
+      prevScanResult: null,
+    }
   }
 
   componentDidMount() {
@@ -58,6 +61,11 @@ const Scanner = class Scanner extends React.Component {
         Quagga.start()
       }
     )
+
+    // const canvas = document.getElementsByClassName('drawingBuffer')[0]
+    // const ctx = canvas.getContext('2d')
+    // ctx.fillStyle = '#FF0000'
+    // ctx.fillRect(0, 0, 150, 75)
 
     Quagga.onDetected(this.onDetected)
   }
