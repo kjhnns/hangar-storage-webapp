@@ -33,10 +33,13 @@ const ResponsiveDialog = styled(Dialog)`
 
 const AddModal = ({ addCardHandler }) => {
   const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
   const [scanning, setScanning] = useState(false)
   const [serialNo, setSerialNo] = useState('')
+  const open = () => setShowDialog(true)
+  const close = async () => {
+    await setSerialNo('')
+    return setShowDialog(false)
+  }
 
   if (scanning) {
     return (
