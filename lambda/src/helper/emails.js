@@ -28,13 +28,17 @@ const sendConfirmation = async ({ personalInformation, boxes }) => {
     const mailData = {
       from: `HangarStorage <${fromEmail}>`,
       to: [personalInformation.email],
-      subject: '📦 Confirmation Email',
+      subject:
+        '📦✅ Seu Inventário na Hangar Storage foi registrado com sucesso',
       text: [
-        `Hello ${personalInformation.name},\n`,
-        `Here is a list of your boxes:\n`,
-        `${formattedData}\n`,
-        `Best Regards,`,
-        `Enzo`,
+        `Olá ${personalInformation.name},\n`,
+        `Obrigado por armazenar com a Hangar!`,
+        `Abaixo o seu inventário completo:\n`,
+        `${formattedData}\n\n`,
+        `Quando houver a necessidade de recuperar algum item, entre em contato com os canais de atendimento e solicite através do Número da Etiqueta.\n`,
+        `Equipe Hangar Storage 💙`,
+        `WhatsApp: (11) 9 9534-7733`,
+        `Email: info@hangarstorage.com.br`,
       ].join('\n'),
     }
 
