@@ -15,6 +15,7 @@ const VideoViewport = styled.div`
 
   canvas {
     width: 100%;
+    max-height: 25vh;
     left: 0;
     top: 0;
     position: absolute;
