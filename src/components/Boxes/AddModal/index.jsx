@@ -50,7 +50,7 @@ const AddModal = ({ addCardHandler }) => {
             <Heading textAlign="center" as="h1">
               Escanear Etiqueta
             </Heading>
-            <Text m={2}>
+            <Text m={2} textAlign="center">
               Aponte a câmera do seu celular para o código de barras
             </Text>
             <Scanner

@@ -9,6 +9,7 @@ const VideoViewport = styled.div`
 
   video {
     width: 100%;
+    max-height: 25vh;
     object-fit: cover;
   }
 
