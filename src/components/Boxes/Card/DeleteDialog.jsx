@@ -34,9 +34,9 @@ const DeleteDialog = ({ deleteHandler }) => {
         onDismiss={close}
       >
         <Flex flexDirection="column">
-          <Heading py={3}>Delete Box?</Heading>
+          <Heading py={3}>Eliminar caixa?</Heading>
           <Text py={3}>
-            This can not be undone and it will delete this box.
+            Isto não pode ser desfeita e irá eliminar esta caixa.
           </Text>
           <Flex
             py={3}
@@ -50,10 +50,10 @@ const DeleteDialog = ({ deleteHandler }) => {
                 await close()
               }}
             >
-              Delete
+              Eliminar
             </Button>
             <Button variant="clear" onClick={close}>
-              cancel
+              Cancelar
             </Button>
           </Flex>
         </Flex>

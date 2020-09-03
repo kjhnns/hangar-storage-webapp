@@ -46,7 +46,7 @@ const IndexPage = () => {
             Hangar Storage
           </Heading>
           <Text my={3} color="gray.900">
-            Steps to register your boxes:
+            Passos para Registrar as Suas Caixas:
           </Text>
           <Flex
             flexDirection="column"
@@ -63,7 +63,6 @@ const IndexPage = () => {
           >
             <Box sx={stepBoxStyle}>1. Informações Pessoais</Box>
             <Box sx={stepBoxStyle}>2. Cadastro de Caixas</Box>
-            <Box sx={stepBoxStyle}>3. Solicitar Entrega/Coleta</Box>
           </Flex>
           <Box m={3}>
             <Button as={Link} to="/person">

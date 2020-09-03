@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { Dialog } from '@reach/dialog'
 import { Flex, Box } from '@components/Grid'
 import { Button } from '@components/Button'
-import { Heading } from '@components/Typography'
+import { Heading, Text } from '@components/Typography'
 import { Scanner } from './Scanner'
 import { AddButton } from './AddButton'
 import { AddBox } from './AddBox'
@@ -48,16 +48,19 @@ const AddModal = ({ addCardHandler }) => {
         <ResponsiveDialog aria-label="Add Box" isOpen={showDialog}>
           <Flex flexDirection="column" alignItems="center">
             <Heading textAlign="center" as="h1">
-              Scan Barcode
+              Escanear Etiqueta
             </Heading>
+            <Text m={2}>
+              Aponte a câmera do seu celular para o código de barras
+            </Text>
             <Scanner
               onDetected={barCode => {
                 setSerialNo(barCode)
                 setScanning(false)
               }}
             />
-            <Box>
-              <Button onClick={() => setScanning(false)}>Stop</Button>
+            <Box mt={2}>
+              <Button onClick={() => setScanning(false)}>Voltar</Button>
             </Box>
           </Flex>
         </ResponsiveDialog>

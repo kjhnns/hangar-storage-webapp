@@ -7,6 +7,7 @@ import { Box, Flex } from '@components/Grid'
 import { Button } from '@components/Button'
 import { Heading, Text } from '@components/Typography'
 import { Form, Input, TextArea } from '@components/Form'
+import ScanIcon from './ScanIcon.svg'
 
 // https://codesandbox.io/s/lyr3nq0vlm?file=/src/Scanner.js
 
@@ -39,7 +40,7 @@ const PureAddBox = ({ errors, handleSubmit, closeModal, startScanner }) => (
       }}
     >
       <Heading textAlign="center" as="h1">
-        Add Box
+        Adicionar Caixa
       </Heading>
       <Box my={2}>
         <Text>Etiqueta Caixa*</Text>
@@ -48,8 +49,10 @@ const PureAddBox = ({ errors, handleSubmit, closeModal, startScanner }) => (
             <Input type="text" name="serialNo" />
           </Box>
           <Box ml={2}>
-            <Button sx={{ minWidth: 'auto' }} onClick={startScanner}>
-              Scan
+            <Button sx={{ minWidth: 'auto', p: '7px' }} onClick={startScanner}>
+              <Box sx={{ width: '53px' }}>
+                <img src={ScanIcon} alt="Scanner Icon" width="100%" />
+              </Box>
             </Button>
           </Box>
         </Flex>
@@ -85,9 +88,9 @@ const PureAddBox = ({ errors, handleSubmit, closeModal, startScanner }) => (
         flexDirection={['column', 'row', 'row']}
         justifyContent="center"
       >
-        <Button type="submit">Add</Button>
+        <Button type="submit">Adicionar</Button>
         <Button variant="clear" onClick={closeModal}>
-          cancel
+          Cancelar
         </Button>
       </Flex>
     </Box>

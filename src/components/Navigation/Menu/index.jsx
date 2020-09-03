@@ -15,7 +15,7 @@ const Menu = ({ stepNo, stepName }) => (
         mb={1}
         sx={{ color: 'gray.700', textTransform: 'uppercase', fontSize: 1 }}
       >
-        Step {stepNo}
+        Passo {stepNo}
       </Box>
       <Box mb={2}>{stepName}</Box>
     </Flex>

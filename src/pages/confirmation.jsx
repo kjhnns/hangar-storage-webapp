@@ -47,10 +47,9 @@ const IndexPage = () => {
             servidores.
           </Text>
           <Text color="gray.900" px={[4, 4, 6]} py={2} textAlign="center">
-            Você também irá receber uma mensagem no seu WhatsApp com os números
-            das etiquetas de suas caixas. Caso deseje receber o relatório
-            completo, com número de lacres e descrição de conteúdo, solicite
-            através de nossos canais de atendimento.
+            Você irá receber um email com o seu inventário completo. Para
+            dúvidas ou solicitações de entregas e coletas, entre em contato com
+            o nosso atendimento por email ou WhatsApp
           </Text>
         </Box>
       </Box>

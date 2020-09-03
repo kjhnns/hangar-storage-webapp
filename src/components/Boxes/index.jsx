@@ -112,11 +112,11 @@ const Boxes = () => {
     return (
       <Box>
         <Text color="gray.900" py={4} textAlign="center">
-          Preciso suas caixas
+          Clique no + para adicionar caixas
         </Text>
         <AddModal addCardHandler={addCardHandler} />
         <Flex sx={nextButtonStyle}>
-          <Button variant="disabled">Avançar</Button>
+          <Button variant="disabled">Submeter Inventário</Button>
         </Flex>
       </Box>
     )
@@ -151,7 +151,7 @@ const Boxes = () => {
       <AddModal addCardHandler={addCardHandler} />
       <Flex sx={nextButtonStyle}>
         <Button onClick={SubmitForm}>
-          {submitting ? 'Avançar ...' : 'Avançar'}
+          {submitting ? 'Submeter Inventário ...' : 'Submeter Inventário'}
         </Button>
       </Flex>
     </Box>
