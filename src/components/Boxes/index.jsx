@@ -61,6 +61,14 @@ const Boxes = () => {
       const personalInformation = JSON.parse(
         localStorage.getItem('personalInformation')
       )
+      if (
+        !personalInformation ||
+        !personalInformation.name ||
+        !personalInformation.cpf ||
+        !personalInformation.email
+      ) {
+        await navigate('/person')
+      }
 
       try {
         const response = await axios.post(
