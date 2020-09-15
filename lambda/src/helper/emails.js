@@ -1,6 +1,18 @@
 /* eslint-disable compat/compat */
 const Mailgun = require('mailgun-js')
 
+const formatBoxData = boxes =>
+  boxes
+    .map(item =>
+      [
+        `Etiqueta Caixa: ${item.serialNo || ''}`,
+        `Lacre 01: ${item.seal01 || ''}`,
+        `Lacre 02: ${item.seal02 || ''}`,
+        `Descrição: ${item.description || ''}`,
+      ].join('\n')
+    )
+    .join('\n-----------\n')
+
 const sendConfirmation = async ({ personalInformation, boxes }) => {
   return new Promise((resolve, reject) => {
     const {
@@ -14,16 +26,7 @@ const sendConfirmation = async ({ personalInformation, boxes }) => {
       domain,
     })
 
-    const formattedData = boxes
-      .map(item =>
-        [
-          `Etiqueta Caixa: ${item.serialNo || ''}`,
-          `Lacre 01: ${item.seal01 || ''}`,
-          `Lacre 02: ${item.seal02 || ''}`,
-          `Descrição: ${item.description || ''}`,
-        ].join('\n')
-      )
-      .join('\n-----------\n\n')
+    const formattedData = formatBoxData(boxes)
 
     const mailData = {
       from: `HangarStorage <${fromEmail}>`,
@@ -49,7 +52,7 @@ const sendConfirmation = async ({ personalInformation, boxes }) => {
   })
 }
 
-const sendNotification = async data => {
+const sendNotification = async ({ personalInformation, boxes }) => {
   return new Promise((resolve, reject) => {
     const {
       MG_API_KEY: apiKey,
@@ -63,12 +66,14 @@ const sendNotification = async data => {
       domain,
     })
 
-    const stringData = JSON.stringify(data, null, 4)
+    const formatedBoxes = formatBoxData(boxes)
+    const formatedPerson = `Name: ${personalInformation.name}\nCPF: ${personalInformation.cpf}\nE-Mail: ${personalInformation.email}`
+
     const mailData = {
       from: `HangarStorage <${fromEmail}>`,
       to: toEmail.split(','),
       subject: '📦Boxes Registered',
-      text: `New Application just submitted \n${stringData}`,
+      text: `PERSONAL INFORMATION\n\n${formatedPerson}\n\n\n\nBOXES\n\n${formatedBoxes}`,
     }
 
     mailgun.messages().send(mailData, err => {
