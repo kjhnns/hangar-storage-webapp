@@ -24,6 +24,14 @@ const saveBoxes = async data => {
   })
 }
 
+const chunkDispatcher = async (data, dispatcher) => {
+  if (data.length > 0) {
+    const chunk = data.splice(0, 10)
+    await dispatcher(chunk)
+    await chunkDispatcher(data, dispatcher)
+  }
+}
+
 exports.handler = async event => {
   const { httpMethod, body } = event
 
@@ -61,7 +69,7 @@ exports.handler = async event => {
     }))
 
     try {
-      await saveBoxes(formattedData)
+      await chunkDispatcher(formattedData, saveBoxes)
       await emails.send({
         personalInformation,
         boxes,
